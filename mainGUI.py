@@ -170,9 +170,9 @@ class loginThread(QtCore.QThread):
         countdic = {}
         playtime = 0
         for game in games:
-            timestamp = str(game['gameCreation']/1000)
+            timestamp = game['gameCreation']/1000
             if timestamp > 1420070400: #2015
-                countdic[timestamp] = 1
+                countdic[str(timestamp)] = 1
                 playtime += game['gameDuration']
 
         baseHTML = open('base.html').read()
