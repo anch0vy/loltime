@@ -1,0 +1,113 @@
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<script type="text/javascript" src="http://d3js.org/d3.v3.min.js"></script>
+		<script type="text/javascript" src="http://cdn.jsdelivr.net/cal-heatmap/3.3.10/cal-heatmap.min.js"></script>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>
+		<link rel="stylesheet" href="http://cdn.jsdelivr.net/cal-heatmap/3.3.10/cal-heatmap.css" />
+		<style>
+			#contain{
+				width: 800px;
+				margin: 0 auto;
+			}
+			text{
+				fill:#000 !important;
+				font-size:80% !important;
+			}
+			p{
+				text-align: center;
+				font-size: 150%;
+			}
+		</style>
+	</head>
+	<body>
+	<div id="contain">
+		<p>2015년도엔 얼마나 롤을 했을까?</p>
+		<div id="cal1"></div>
+		<div id="cal2"></div>
+		<div id="cal3"></div>
+		<p>
+			총 플레이타임: %day%일 %hour%시간 %min% 분
+		</p>
+	</div>
+		<script>
+
+var datas = %countdic%;
+var cal1 = new CalHeatMap();
+
+var parser = function(data) {
+	return data
+};
+
+var cal1 = new CalHeatMap();
+cal1.init({
+	itemSelector: "#cal1",
+	domain: "month",
+	subDomain: "x_day",
+	data: datas,
+	start: new Date(2015, 0),
+	cellSize: 20,
+	cellPadding: 5,
+	domainGutter: 20,
+	range: 4,
+	afterLoadData: parser,
+	domainDynamicDimension: false,
+	domainLabelFormat: function(date) {
+		moment.lang("en");
+		return moment(date).format("M월").toUpperCase();
+	},
+	subDomainTextFormat: "%d",
+	tooltip:true,
+	label:{position:"top"},
+	legend: [3, 6, 9, 12, 15, 18, 21],
+	displayLegend:false
+});
+var cal2 = new CalHeatMap();
+cal2.init({
+	itemSelector: "#cal2",
+	domain: "month",
+	subDomain: "x_day",
+	data: datas,
+	afterLoadData: parser,
+	start: new Date(2015, 4),
+	cellSize: 20,
+	cellPadding: 5,
+	domainGutter: 20,
+	range: 4,
+	domainDynamicDimension: false,
+	domainLabelFormat: function(date) {
+		moment.lang("en");
+		return moment(date).format("M월").toUpperCase();
+	},
+	subDomainTextFormat: "%d",
+	tooltip:true,
+	displayLegend:false,
+	label:{position:"top"},
+	legend: [3, 6, 9, 12, 15, 18, 21]
+});
+var cal3 = new CalHeatMap();
+cal3.init({
+	itemSelector: "#cal3",
+	domain: "month",
+	subDomain: "x_day",
+	data: datas,
+	start: new Date(2015, 8),
+	afterLoadData: parser,
+	cellSize: 20,
+	cellPadding: 5,
+	domainGutter: 20,
+	range: 4,
+	domainDynamicDimension: false,
+	domainLabelFormat: function(date) {
+		moment.lang("en");
+		return moment(date).format("M월").toUpperCase();
+	},
+	subDomainTextFormat: "%d",
+	tooltip:true,
+	label:{position:"top"},
+	legendHorizontalPosition:"right",
+	legend: [3, 6, 9, 12, 15, 18, 21]
+});
+		</script>
+	</body>
+</html>
